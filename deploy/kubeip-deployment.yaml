@@ -20,6 +20,7 @@ spec:
         priorityClassName: system-cluster-critical
         nodeSelector:
           cloud.google.com/gke-nodepool: pool-kubip
+
         containers:
         - name: "kubeip"
           image: doitintl/kubeip:latest
@@ -63,11 +64,12 @@ spec:
               configMapKeyRef:
                 key: "KUBEIP_ALLNODEPOOLS"
                 name: "kubeip-config"
-
-
-
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /var/secrets/google/key.json
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
         restartPolicy: Always
         serviceAccountName: kubeip-sa
         volumes:
