@@ -17,7 +17,7 @@ You'll also need the Google Cloud SDK. You can install the [Google Cloud SDK](ht
 
 **Best place to config gcp is at 'Gcp Cloud Shell'**
 # Gcp Setup | Create Nodepool/Static ips/Service Account
-### With one GKE cluster in project you can you this:
+### With one GKE cluster in project you can use this:
 ```bash
 export GCP_ZONE=$(gcloud container clusters list --format="value(selfLink.scope())" | cut -d/ -f1 )
 export GCP_REGION=$(echo $GCP_ZONE | cut -d- -f1,2)
@@ -43,6 +43,8 @@ export KUBEIP_NODEPOOL=<nodepool-with-static-ips>
 # change self nodepool name if you have already a nodepool for kubeip
 export KUBEIP_SELF_NODEPOOL=kubeip-nodepool
 ```
+
+[Check env vars value](scripts/check_env_var.sh)
 
 ### Create nodepool for kubeip ( skip this step if you have already ), example only
 
@@ -136,7 +138,6 @@ helm upgrade -i -n kubeip kubeip .            \
   --set nodeSelector."cloud\\.google\\.com/gke-nodepool"=$KUBEIP_SELF_NODEPOOL   \
   --set kubeip.nodepool=$KUBEIP_NODEPOOL
 ```
-
 # Notes
  - The `KUBEIP_LABELVALUE` should be your GKE's cluster name
  - The `KUBEIP_NODEPOOL` should match the name of your GKE node-pool on which kubeIP will operate

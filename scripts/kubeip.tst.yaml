@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+
+  replicas: 4
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: staticips
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
