@@ -1,5 +1,5 @@
 {{- if .Values.auth.create -}}
-apiVersion: v1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ .Values.auth.clusterRole.name }}

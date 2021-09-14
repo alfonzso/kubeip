@@ -41,6 +41,9 @@ spec:
             value: /var/secrets/google/key.json
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: google-cloud-key
+            mountPath: /var/secrets/google
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
