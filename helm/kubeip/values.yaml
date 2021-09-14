@@ -12,6 +12,20 @@ image:
 
 kubeip:
   secretNameOfSA: "kubeip-sa"
+  labelkey: "kubeip"
+  labelvalue:
+  nodepool:
+  forceassignment: "true"
+  additionalnodepools: ""
+  ticker: "5"
+  allnodepools: "false"
+
+auth:
+  create: true
+  clusterRole:
+    name: kubeip-sa
+  clusterRoleBinding:
+    name: kubeip-sa
 
 imagePullSecrets: []
 nameOverride: ""

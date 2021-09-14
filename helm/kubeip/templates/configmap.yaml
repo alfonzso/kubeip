@@ -6,10 +6,10 @@ metadata:
     {{- include "kubeip.labels" . | nindent 4 }}
   namespace: kube-system
 data:
-  KUBEIP_LABELKEY: "kubeip"
-  KUBEIP_LABELVALUE: "reserved"
-  KUBEIP_NODEPOOL: "default-pool"
-  KUBEIP_FORCEASSIGNMENT: "true"
-  KUBEIP_ADDITIONALNODEPOOLS: ""
-  KUBEIP_TICKER: "5"
-  KUBEIP_ALLNODEPOOLS: "false"
+  KUBEIP_LABELKEY:            {{ .Values.kubeip.labelkey }}
+  KUBEIP_LABELVALUE:          {{ required "GKE cluster name needed ( .Values.kubeip.labelvalue  ) ! " .Values.kubeip.labelvalue }}
+  KUBEIP_NODEPOOL:            {{ required "Targeted nodepool name needed ( .Values.kubeip.nodepool ) ! " .Values.kubeip.nodepool }}
+  KUBEIP_FORCEASSIGNMENT:     {{ .Values.kubeip.forceassignment }}
+  KUBEIP_ADDITIONALNODEPOOLS: {{ .Values.kubeip.additionalnodepools }}
+  KUBEIP_TICKER:              {{ .Values.kubeip.ticker }}
+  KUBEIP_ALLNODEPOOLS:        {{ .Values.kubeip.allnodepools }}
