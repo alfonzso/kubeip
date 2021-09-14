@@ -15,7 +15,7 @@ You'll also need the Google Cloud SDK. You can install the [Google Cloud SDK](ht
  * kubectl + you can access your cluster
  * You have admin right to your cluster
 
-**Best place to config gcp is at 'Gcp Cloud Shell'**
+**Best place to setup/config gcp is at 'Gcp Cloud Shell'**
 # Gcp Setup | Create Nodepool/Static ips/Service Account
 ### With one GKE cluster in project you can use this:
 ```bash
@@ -69,11 +69,6 @@ gcloud beta container node-pools create "$KUBEIP_SELF_NODEPOOL"           \
 ```bash
 # Create a Service Account
 gcloud iam service-accounts create kubeip-service-account --display-name "kubeIP"
-
-# # Create and attach a custom kubeIP role to the service account
-# gcloud iam roles create kubeip \
-#   --project $PROJECT_ID        \
-#   --file gcp/roles.yaml
 
 # Create and attach a custom kubeIP role to the service account
 gcloud iam roles create kubeip \
@@ -133,7 +128,7 @@ kubectl create ns kubeip
 # Create a k8s kubeip-sa-key secret
 kubectl -n kubeip create secret generic $KUBEIP_SECRET_SA --from-file=key.json
 
-helm upgrade -i -n kubeip kubeip .            \
+helm upgrade -i -n kubeip kubeip helm/kubeip            \
   --set kubeip.labelvalue=$GKE_CLUSTER_NAME   \
   --set nodeSelector."cloud\\.google\\.com/gke-nodepool"=$KUBEIP_SELF_NODEPOOL   \
   --set kubeip.nodepool=$KUBEIP_NODEPOOL
