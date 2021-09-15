@@ -128,8 +128,11 @@ kubectl create ns kubeip
 # Create a k8s kubeip-sa-key secret
 kubectl -n kubeip create secret generic $KUBEIP_SECRET_SA --from-file=key.json
 
-helm upgrade -i -n kubeip kubeip helm/kubeip            \
-  --set kubeip.labelvalue=$GKE_CLUSTER_NAME   \
+helm repo add alfonzso https://alfonzso.github.io/kubeip/
+helm repo list
+
+helm upgrade -i -n kubeip kubeip alfonzso/kubeip                                 \
+  --set kubeip.labelvalue=$GKE_CLUSTER_NAME                                      \
   --set nodeSelector."cloud\\.google\\.com/gke-nodepool"=$KUBEIP_SELF_NODEPOOL   \
   --set kubeip.nodepool=$KUBEIP_NODEPOOL
 ```
