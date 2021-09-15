@@ -64,7 +64,7 @@ gcloud beta container node-pools create "$KUBEIP_SELF_NODEPOOL"           \
   --max-surge-upgrade 1                                                   \
   --max-unavailable-upgrade 0
 ```
-
+### Create SA with role and generate json key
 
 ```bash
 # Create a Service Account
